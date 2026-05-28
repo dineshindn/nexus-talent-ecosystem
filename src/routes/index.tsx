@@ -333,14 +333,14 @@ function Stats() {
       <div className="relative overflow-hidden rounded-[2rem] gradient-deep-bg p-12 lg:p-16 text-white">
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="blob top-0 right-0 h-72 w-72 bg-[oklch(0.72_0.14_211)]" />
-        <div className="relative grid md:grid-cols-4 gap-10">
+        <RevealStagger className="relative grid md:grid-cols-4 gap-10" stagger={0.1}>
           {stats.map((s) => (
-            <div key={s.l}>
+            <motion.div key={s.l} variants={staggerItem}>
               <div className="text-5xl lg:text-6xl font-display font-extrabold text-gradient-light">{s.v}</div>
               <div className="mt-2 text-sm text-white/70 uppercase tracking-wider">{s.l}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     </Section>
   );
@@ -349,13 +349,20 @@ function Stats() {
 function Testimonials() {
   return (
     <Section className="bg-surface-2/50">
-      <SectionHeader
-        eyebrow="Loved by teams"
-        title={<>Built for ambitious <span className="text-gradient">people & companies.</span></>}
-      />
-      <div className="mt-16 grid md:grid-cols-3 gap-6">
+      <Reveal>
+        <SectionHeader
+          eyebrow="Loved by teams"
+          title={<>Built for ambitious <span className="text-gradient">people & companies.</span></>}
+        />
+      </Reveal>
+      <RevealStagger className="mt-16 grid md:grid-cols-3 gap-6" stagger={0.1}>
         {testimonials.map((t) => (
-          <div key={t.name} className="rounded-3xl bg-surface border border-border p-8 glow-hover">
+          <motion.div
+            key={t.name}
+            variants={staggerItem}
+            whileHover={{ y: -6 }}
+            className="rounded-3xl bg-surface border border-border p-8 glow-hover"
+          >
             <div className="flex gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="h-4 w-4 fill-[oklch(0.72_0.14_211)] text-[oklch(0.72_0.14_211)]" />
@@ -371,9 +378,9 @@ function Testimonials() {
                 <div className="text-xs text-muted-foreground">{t.role}</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </RevealStagger>
     </Section>
   );
 }
@@ -424,25 +431,35 @@ function FAQ() {
 function CTABanner() {
   return (
     <Section>
-      <div className="relative overflow-hidden rounded-[2rem] gradient-hero-bg p-12 lg:p-20 text-center text-white">
-        <div className="absolute inset-0 grid-overlay opacity-30" />
-        <div className="blob -top-20 -left-20 h-80 w-80 bg-[oklch(0.71_0.16_162)]" />
-        <div className="blob -bottom-20 -right-20 h-80 w-80 bg-[oklch(0.72_0.14_211)]" />
-        <div className="relative max-w-3xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-            Ready to transform how you <span className="text-gradient-light">hire and grow?</span>
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            Join 8,400+ companies and 200K+ professionals building the future of work on G Talent Pro.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <CTAButton variant="primary">Get Started Free <ArrowRight className="h-4 w-4" /></CTAButton>
-            <button className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm font-semibold text-white hover:bg-white/15 transition">
-              <Search className="h-4 w-4" /> Talk to Sales
-            </button>
+      <Reveal direction="scale">
+        <div className="relative overflow-hidden rounded-[2rem] gradient-hero-bg p-12 lg:p-20 text-center text-white">
+          <div className="absolute inset-0 grid-overlay opacity-30" />
+          <motion.div
+            className="blob -top-20 -left-20 h-80 w-80 bg-[oklch(0.71_0.16_162)]"
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="blob -bottom-20 -right-20 h-80 w-80 bg-[oklch(0.72_0.14_211)]"
+            animate={{ scale: [1.1, 1, 1.1] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="relative max-w-3xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+              Ready to transform how you <span className="text-gradient-light">hire and grow?</span>
+            </h2>
+            <p className="mt-5 text-lg text-white/80">
+              Join 8,400+ companies and 200K+ professionals building the future of work on G Talent Pro.
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <CTAButton variant="primary">Get Started Free <ArrowRight className="h-4 w-4" /></CTAButton>
+              <button className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm font-semibold text-white hover:bg-white/15 transition">
+                <Search className="h-4 w-4" /> Talk to Sales
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }
