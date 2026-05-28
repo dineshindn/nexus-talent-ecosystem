@@ -216,12 +216,6 @@ function Ecosystem() {
 function Services() {
   return (
     <Section>
-      <SectionHeader
-        eyebrow="Services"
-        title={<>Smart hiring solutions <span className="text-gradient">for the modern workforce.</span></>}
-        subtitle="Flexible models built around outcomes — from talent and recruitment to placement, training, and verification."
-      />
-      <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
       <Reveal>
         <SectionHeader
           eyebrow="Services"
