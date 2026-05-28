@@ -136,7 +136,7 @@ function AIIntelligence() {
   return (
     <Section>
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
+        <Reveal direction="right">
           <EyebrowChip>AI Talent Intelligence</EyebrowChip>
           <h2 className="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight">
             Smarter hiring starts with <span className="text-gradient">intelligent talent insights.</span>
@@ -152,22 +152,23 @@ function AIIntelligence() {
             </CTAButton>
             <CTAButton variant="ghost" as={Link} to="/talent">For Talent</CTAButton>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          {aiFeatures.map(({ icon: Icon, t }, i) => (
-            <div
+        <RevealStagger className="grid sm:grid-cols-2 gap-4">
+          {aiFeatures.map(({ icon: Icon, t }) => (
+            <motion.div
               key={t}
+              variants={staggerItem}
+              whileHover={{ y: -6 }}
               className="gradient-border p-6 glow-hover"
-              style={{ animationDelay: `${i * 60}ms` }}
             >
               <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-[oklch(0.55_0.22_264)] to-[oklch(0.72_0.14_211)] flex items-center justify-center shadow-[var(--shadow-glow)]">
                 <Icon className="h-5 w-5 text-white" />
               </div>
               <p className="mt-4 text-sm font-semibold text-foreground leading-tight">{t}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     </Section>
   );
@@ -176,14 +177,21 @@ function AIIntelligence() {
 function Ecosystem() {
   return (
     <Section className="bg-surface-2/50">
-      <SectionHeader
-        eyebrow="Connected Talent Ecosystem"
-        title={<>One ecosystem. <span className="text-gradient">Three powerful experiences.</span></>}
-        subtitle="We don't just help organizations hire — we help them build future-ready teams faster, smarter, and more effectively."
-      />
-      <div className="mt-16 grid md:grid-cols-3 gap-6">
+      <Reveal>
+        <SectionHeader
+          eyebrow="Connected Talent Ecosystem"
+          title={<>One ecosystem. <span className="text-gradient">Three powerful experiences.</span></>}
+          subtitle="We don't just help organizations hire — we help them build future-ready teams faster, smarter, and more effectively."
+        />
+      </Reveal>
+      <RevealStagger className="mt-16 grid md:grid-cols-3 gap-6" stagger={0.12}>
         {ecosystem.map(({ icon: Icon, tag, title, desc, bullets, accent }) => (
-          <div key={tag} className="group relative rounded-3xl bg-surface border border-border p-8 glow-hover overflow-hidden">
+          <motion.div
+            key={tag}
+            variants={staggerItem}
+            whileHover={{ y: -8 }}
+            className="group relative rounded-3xl bg-surface border border-border p-8 glow-hover overflow-hidden"
+          >
             <div className={`absolute -top-20 -right-20 h-48 w-48 rounded-full bg-gradient-to-br ${accent} opacity-20 blur-3xl group-hover:opacity-40 transition-opacity`} />
             <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${accent} flex items-center justify-center shadow-[var(--shadow-glow)]`}>
               <Icon className="h-6 w-6 text-white" />
@@ -198,9 +206,9 @@ function Ecosystem() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </RevealStagger>
     </Section>
   );
 }
@@ -214,8 +222,21 @@ function Services() {
         subtitle="Flexible models built around outcomes — from talent and recruitment to placement, training, and verification."
       />
       <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      <Reveal>
+        <SectionHeader
+          eyebrow="Services"
+          title={<>Smart hiring solutions <span className="text-gradient">for the modern workforce.</span></>}
+          subtitle="Flexible models built around outcomes — from talent and recruitment to placement, training, and verification."
+        />
+      </Reveal>
+      <RevealStagger className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" stagger={0.05}>
         {services.map(({ icon: Icon, name, desc }) => (
-          <div key={name} className="group rounded-2xl bg-surface border border-border p-6 glow-hover">
+          <motion.div
+            key={name}
+            variants={staggerItem}
+            whileHover={{ y: -6, scale: 1.02 }}
+            className="group rounded-2xl bg-surface border border-border p-6 glow-hover"
+          >
             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[oklch(0.55_0.22_264)] to-[oklch(0.72_0.14_211)] flex items-center justify-center text-white">
               <Icon className="h-5 w-5" />
             </div>
@@ -224,14 +245,14 @@ function Services() {
             <div className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-2 transition-all">
               Learn more <ArrowRight className="h-3 w-3" />
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-      <div className="mt-10 text-center">
+      </RevealStagger>
+      <Reveal delay={0.15} className="mt-10 text-center">
         <CTAButton variant="ghost" as={Link} to="/services">
           View all services <ArrowRight className="h-4 w-4" />
         </CTAButton>
-      </div>
+      </Reveal>
     </Section>
   );
 }
