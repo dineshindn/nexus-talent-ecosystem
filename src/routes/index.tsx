@@ -1,13 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import {
-  Sparkles, ArrowRight, Brain, Users, Building2, GraduationCap,
+  ArrowRight, Brain, Users, Building2, GraduationCap,
   Briefcase, Target, Award, TrendingUp, Shield, Zap, BarChart3,
   CheckCircle2, FileText, Search, ChevronDown, Star, Globe2, Workflow,
+  UserPlus, Sparkles, Send, Rocket,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Section, SectionHeader, EyebrowChip, CTAButton } from "@/components/site/primitives";
-import heroImage from "@/assets/hero-ai.jpg";
+import { HeroCarousel } from "@/components/site/HeroCarousel";
+import { Reveal, RevealStagger, staggerItem } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -65,10 +68,10 @@ const aiFeatures = [
 ];
 
 const steps = [
-  { n: "01", t: "Create Smart Profile", d: "Upload resume, showcase skills, experience, and career goals." },
-  { n: "02", t: "Get AI Insights", d: "Receive matching jobs, skill suggestions, profile enhancements." },
-  { n: "03", t: "Connect Employers", d: "Apply to verified employers and become visible to hiring teams." },
-  { n: "04", t: "Get Hired & Grow", d: "Track interviews, get updates, and grow your career." },
+  { n: "01", t: "Create Smart Profile", d: "Upload resume, showcase skills, experience, and career goals.", icon: UserPlus },
+  { n: "02", t: "Get AI Insights", d: "Receive matching jobs, skill suggestions, profile enhancements.", icon: Sparkles },
+  { n: "03", t: "Connect Employers", d: "Apply to verified employers and become visible to hiring teams.", icon: Send },
+  { n: "04", t: "Get Hired & Grow", d: "Track interviews, get updates, and grow your career.", icon: Rocket },
 ];
 
 const stats = [
@@ -94,7 +97,7 @@ const faqs = [
 function Home() {
   return (
     <SiteLayout>
-      <Hero />
+      <HeroCarousel />
       <TrustedStrip />
       <AIIntelligence />
       <Ecosystem />
@@ -108,96 +111,6 @@ function Home() {
   );
 }
 
-function Hero() {
-  return (
-    <section className="relative overflow-hidden gradient-deep-bg text-white">
-      <div className="absolute inset-0 grid-overlay opacity-40" />
-      <div className="blob top-20 -left-32 h-[500px] w-[500px] bg-[oklch(0.55_0.22_264)]" />
-      <div className="blob -bottom-20 -right-20 h-[500px] w-[500px] bg-[oklch(0.72_0.14_211)]" />
-      <div className="blob top-1/3 left-1/2 h-[300px] w-[300px] bg-[oklch(0.71_0.16_162)] opacity-30" />
-
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-20 pb-32 lg:pt-32 lg:pb-40">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 animate-fade-up">
-            <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-white/90">
-              <Sparkles className="h-3.5 w-3.5 text-[oklch(0.72_0.14_211)]" />
-              AI-Powered Talent Ecosystem · v2026
-            </span>
-
-            <h1 className="mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight">
-              Powering the <span className="text-gradient-light">Future of Talent</span> &amp; Opportunity.
-            </h1>
-
-            <p className="mt-6 text-lg lg:text-xl text-white/75 max-w-2xl leading-relaxed">
-              AI-driven ecosystem connecting employers, campuses, and professionals.
-              Hire smarter, place faster, grow careers — all on one intelligent platform.
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <CTAButton variant="primary">
-                Explore Platform <ArrowRight className="h-4 w-4" />
-              </CTAButton>
-              <button className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm font-semibold text-white hover:bg-white/15 transition">
-                Request a Demo
-              </button>
-            </div>
-
-            <div className="mt-12 grid grid-cols-3 gap-6 max-w-lg">
-              {[
-                { v: "47%", l: "Faster hiring" },
-                { v: "8.4K+", l: "Companies" },
-                { v: "98%", l: "Match accuracy" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div className="text-2xl lg:text-3xl font-display font-extrabold text-gradient-light">
-                    {s.v}
-                  </div>
-                  <div className="text-xs text-white/60 mt-1">{s.l}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl animate-float">
-              <img
-                src={heroImage}
-                alt="AI talent intelligence visualization"
-                className="w-full h-auto"
-                width={1536} height={1024}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.13_0.05_260)] via-transparent to-transparent" />
-            </div>
-
-            <div className="absolute -left-6 top-12 glass rounded-2xl p-4 w-56 shadow-xl">
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-xl gradient-accent-bg flex items-center justify-center">
-                  <Brain className="h-4 w-4 text-white" />
-                </div>
-                <div>
-                  <div className="text-xs text-white/60">AI Match Score</div>
-                  <div className="text-lg font-bold text-white">96.4%</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -right-4 bottom-8 glass rounded-2xl p-4 w-60 shadow-xl">
-              <div className="text-xs text-white/60">Hires this week</div>
-              <div className="mt-1 flex items-end justify-between">
-                <div className="text-2xl font-extrabold text-white">+128</div>
-                <div className="flex items-end gap-1 h-8">
-                  {[3,5,4,7,6,8,9].map((h,i) => (
-                    <div key={i} className="w-1.5 rounded-full gradient-accent-bg" style={{ height: `${h*4}px` }} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function TrustedStrip() {
   const logos = ["Microsoft", "Infosys", "Deloitte", "Accenture", "TCS", "Cognizant", "Wipro", "HCL", "Capgemini"];
@@ -223,7 +136,7 @@ function AIIntelligence() {
   return (
     <Section>
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div>
+        <Reveal direction="right">
           <EyebrowChip>AI Talent Intelligence</EyebrowChip>
           <h2 className="mt-5 text-4xl sm:text-5xl font-extrabold tracking-tight">
             Smarter hiring starts with <span className="text-gradient">intelligent talent insights.</span>
@@ -239,22 +152,23 @@ function AIIntelligence() {
             </CTAButton>
             <CTAButton variant="ghost" as={Link} to="/talent">For Talent</CTAButton>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 gap-4">
-          {aiFeatures.map(({ icon: Icon, t }, i) => (
-            <div
+        <RevealStagger className="grid sm:grid-cols-2 gap-4">
+          {aiFeatures.map(({ icon: Icon, t }) => (
+            <motion.div
               key={t}
+              variants={staggerItem}
+              whileHover={{ y: -6 }}
               className="gradient-border p-6 glow-hover"
-              style={{ animationDelay: `${i * 60}ms` }}
             >
               <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-[oklch(0.55_0.22_264)] to-[oklch(0.72_0.14_211)] flex items-center justify-center shadow-[var(--shadow-glow)]">
                 <Icon className="h-5 w-5 text-white" />
               </div>
               <p className="mt-4 text-sm font-semibold text-foreground leading-tight">{t}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     </Section>
   );
@@ -263,14 +177,21 @@ function AIIntelligence() {
 function Ecosystem() {
   return (
     <Section className="bg-surface-2/50">
-      <SectionHeader
-        eyebrow="Connected Talent Ecosystem"
-        title={<>One ecosystem. <span className="text-gradient">Three powerful experiences.</span></>}
-        subtitle="We don't just help organizations hire — we help them build future-ready teams faster, smarter, and more effectively."
-      />
-      <div className="mt-16 grid md:grid-cols-3 gap-6">
+      <Reveal>
+        <SectionHeader
+          eyebrow="Connected Talent Ecosystem"
+          title={<>One ecosystem. <span className="text-gradient">Three powerful experiences.</span></>}
+          subtitle="We don't just help organizations hire — we help them build future-ready teams faster, smarter, and more effectively."
+        />
+      </Reveal>
+      <RevealStagger className="mt-16 grid md:grid-cols-3 gap-6" stagger={0.12}>
         {ecosystem.map(({ icon: Icon, tag, title, desc, bullets, accent }) => (
-          <div key={tag} className="group relative rounded-3xl bg-surface border border-border p-8 glow-hover overflow-hidden">
+          <motion.div
+            key={tag}
+            variants={staggerItem}
+            whileHover={{ y: -8 }}
+            className="group relative rounded-3xl bg-surface border border-border p-8 glow-hover overflow-hidden"
+          >
             <div className={`absolute -top-20 -right-20 h-48 w-48 rounded-full bg-gradient-to-br ${accent} opacity-20 blur-3xl group-hover:opacity-40 transition-opacity`} />
             <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${accent} flex items-center justify-center shadow-[var(--shadow-glow)]`}>
               <Icon className="h-6 w-6 text-white" />
@@ -285,9 +206,9 @@ function Ecosystem() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </RevealStagger>
     </Section>
   );
 }
@@ -295,14 +216,21 @@ function Ecosystem() {
 function Services() {
   return (
     <Section>
-      <SectionHeader
-        eyebrow="Services"
-        title={<>Smart hiring solutions <span className="text-gradient">for the modern workforce.</span></>}
-        subtitle="Flexible models built around outcomes — from talent and recruitment to placement, training, and verification."
-      />
-      <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      <Reveal>
+        <SectionHeader
+          eyebrow="Services"
+          title={<>Smart hiring solutions <span className="text-gradient">for the modern workforce.</span></>}
+          subtitle="Flexible models built around outcomes — from talent and recruitment to placement, training, and verification."
+        />
+      </Reveal>
+      <RevealStagger className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" stagger={0.05}>
         {services.map(({ icon: Icon, name, desc }) => (
-          <div key={name} className="group rounded-2xl bg-surface border border-border p-6 glow-hover">
+          <motion.div
+            key={name}
+            variants={staggerItem}
+            whileHover={{ y: -6, scale: 1.02 }}
+            className="group rounded-2xl bg-surface border border-border p-6 glow-hover"
+          >
             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[oklch(0.55_0.22_264)] to-[oklch(0.72_0.14_211)] flex items-center justify-center text-white">
               <Icon className="h-5 w-5" />
             </div>
@@ -311,38 +239,89 @@ function Services() {
             <div className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-2 transition-all">
               Learn more <ArrowRight className="h-3 w-3" />
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
-      <div className="mt-10 text-center">
+      </RevealStagger>
+      <Reveal delay={0.15} className="mt-10 text-center">
         <CTAButton variant="ghost" as={Link} to="/services">
           View all services <ArrowRight className="h-4 w-4" />
         </CTAButton>
-      </div>
+      </Reveal>
     </Section>
   );
 }
 
 function HowItWorks() {
   return (
-    <Section className="bg-surface-2/50">
-      <SectionHeader
-        eyebrow="How It Works"
-        title={<>Your career journey <span className="text-gradient">in 4 simple steps.</span></>}
+    <Section className="bg-surface-2/50 relative overflow-hidden">
+      <div className="absolute inset-0 grid-overlay opacity-30 pointer-events-none" />
+      <motion.div
+        className="blob top-10 -left-32 h-[400px] w-[400px] bg-[oklch(0.55_0.22_264)] opacity-20"
+        animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {steps.map((s, i) => (
-          <div key={s.n} className="relative">
-            <div className="rounded-3xl bg-surface border border-border p-7 h-full glow-hover">
-              <div className="text-5xl font-display font-extrabold text-gradient">{s.n}</div>
-              <h3 className="mt-4 text-lg font-bold text-foreground">{s.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+      <div className="relative">
+        <Reveal>
+          <SectionHeader
+            eyebrow="How It Works"
+            title={<>Your career journey <span className="text-gradient">in 4 simple steps.</span></>}
+            subtitle="A guided, AI-powered path from profile creation to your next big role — built around outcomes."
+          />
+        </Reveal>
+
+        {/* Animated connecting line (desktop) */}
+        <div className="mt-20 relative">
+          <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px">
+            <div className="relative h-full w-full bg-border/60">
+              <motion.div
+                className="absolute inset-y-0 left-0 bg-gradient-to-r from-[oklch(0.55_0.22_264)] via-[oklch(0.72_0.14_211)] to-[oklch(0.71_0.16_162)]"
+                initial={{ width: "0%" }}
+                whileInView={{ width: "100%" }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+              />
             </div>
-            {i < steps.length - 1 && (
-              <div className="hidden lg:block absolute top-1/2 -right-4 h-px w-8 bg-gradient-to-r from-border to-transparent" />
-            )}
           </div>
-        ))}
+
+          <RevealStagger className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.15}>
+            {steps.map((s) => {
+              const Icon = s.icon;
+              return (
+                <motion.div key={s.n} variants={staggerItem} className="relative group">
+                  {/* Icon node on the line */}
+                  <div className="flex justify-center">
+                    <motion.div
+                      whileHover={{ scale: 1.08, rotate: 6 }}
+                      transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                      className="relative h-24 w-24 rounded-3xl bg-gradient-to-br from-[oklch(0.55_0.22_264)] to-[oklch(0.72_0.14_211)] flex items-center justify-center shadow-[var(--shadow-glow)] z-10"
+                    >
+                      <Icon className="h-10 w-10 text-white" />
+                      <span className="absolute -top-2 -right-2 h-7 w-7 rounded-full bg-white text-[oklch(0.21_0.07_257)] text-xs font-extrabold flex items-center justify-center shadow-md">
+                        {s.n}
+                      </span>
+                      <motion.span
+                        className="absolute inset-0 rounded-3xl bg-[oklch(0.72_0.14_211)] opacity-40 blur-xl -z-10"
+                        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.55, 0.3] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                    </motion.div>
+                  </div>
+
+                  <div className="mt-8 text-center gradient-border p-7 glow-hover">
+                    <h3 className="text-lg font-bold text-foreground">{s.t}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </RevealStagger>
+        </div>
+
+        <Reveal delay={0.2} className="mt-14 text-center">
+          <CTAButton variant="primary" as={Link} to="/talent">
+            Start Your Journey <ArrowRight className="h-4 w-4" />
+          </CTAButton>
+        </Reveal>
       </div>
     </Section>
   );
@@ -354,14 +333,14 @@ function Stats() {
       <div className="relative overflow-hidden rounded-[2rem] gradient-deep-bg p-12 lg:p-16 text-white">
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="blob top-0 right-0 h-72 w-72 bg-[oklch(0.72_0.14_211)]" />
-        <div className="relative grid md:grid-cols-4 gap-10">
+        <RevealStagger className="relative grid md:grid-cols-4 gap-10" stagger={0.1}>
           {stats.map((s) => (
-            <div key={s.l}>
+            <motion.div key={s.l} variants={staggerItem}>
               <div className="text-5xl lg:text-6xl font-display font-extrabold text-gradient-light">{s.v}</div>
               <div className="mt-2 text-sm text-white/70 uppercase tracking-wider">{s.l}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     </Section>
   );
@@ -370,13 +349,20 @@ function Stats() {
 function Testimonials() {
   return (
     <Section className="bg-surface-2/50">
-      <SectionHeader
-        eyebrow="Loved by teams"
-        title={<>Built for ambitious <span className="text-gradient">people & companies.</span></>}
-      />
-      <div className="mt-16 grid md:grid-cols-3 gap-6">
+      <Reveal>
+        <SectionHeader
+          eyebrow="Loved by teams"
+          title={<>Built for ambitious <span className="text-gradient">people & companies.</span></>}
+        />
+      </Reveal>
+      <RevealStagger className="mt-16 grid md:grid-cols-3 gap-6" stagger={0.1}>
         {testimonials.map((t) => (
-          <div key={t.name} className="rounded-3xl bg-surface border border-border p-8 glow-hover">
+          <motion.div
+            key={t.name}
+            variants={staggerItem}
+            whileHover={{ y: -6 }}
+            className="rounded-3xl bg-surface border border-border p-8 glow-hover"
+          >
             <div className="flex gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="h-4 w-4 fill-[oklch(0.72_0.14_211)] text-[oklch(0.72_0.14_211)]" />
@@ -392,9 +378,9 @@ function Testimonials() {
                 <div className="text-xs text-muted-foreground">{t.role}</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </RevealStagger>
     </Section>
   );
 }
@@ -445,25 +431,35 @@ function FAQ() {
 function CTABanner() {
   return (
     <Section>
-      <div className="relative overflow-hidden rounded-[2rem] gradient-hero-bg p-12 lg:p-20 text-center text-white">
-        <div className="absolute inset-0 grid-overlay opacity-30" />
-        <div className="blob -top-20 -left-20 h-80 w-80 bg-[oklch(0.71_0.16_162)]" />
-        <div className="blob -bottom-20 -right-20 h-80 w-80 bg-[oklch(0.72_0.14_211)]" />
-        <div className="relative max-w-3xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-            Ready to transform how you <span className="text-gradient-light">hire and grow?</span>
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            Join 8,400+ companies and 200K+ professionals building the future of work on G Talent Pro.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <CTAButton variant="primary">Get Started Free <ArrowRight className="h-4 w-4" /></CTAButton>
-            <button className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm font-semibold text-white hover:bg-white/15 transition">
-              <Search className="h-4 w-4" /> Talk to Sales
-            </button>
+      <Reveal direction="scale">
+        <div className="relative overflow-hidden rounded-[2rem] gradient-hero-bg p-12 lg:p-20 text-center text-white">
+          <div className="absolute inset-0 grid-overlay opacity-30" />
+          <motion.div
+            className="blob -top-20 -left-20 h-80 w-80 bg-[oklch(0.71_0.16_162)]"
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="blob -bottom-20 -right-20 h-80 w-80 bg-[oklch(0.72_0.14_211)]"
+            animate={{ scale: [1.1, 1, 1.1] }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="relative max-w-3xl mx-auto">
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+              Ready to transform how you <span className="text-gradient-light">hire and grow?</span>
+            </h2>
+            <p className="mt-5 text-lg text-white/80">
+              Join 8,400+ companies and 200K+ professionals building the future of work on G Talent Pro.
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <CTAButton variant="primary">Get Started Free <ArrowRight className="h-4 w-4" /></CTAButton>
+              <button className="inline-flex items-center gap-2 rounded-full glass px-6 py-3 text-sm font-semibold text-white hover:bg-white/15 transition">
+                <Search className="h-4 w-4" /> Talk to Sales
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }
