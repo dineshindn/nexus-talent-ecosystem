@@ -238,24 +238,75 @@ function Services() {
 
 function HowItWorks() {
   return (
-    <Section className="bg-surface-2/50">
-      <SectionHeader
-        eyebrow="How It Works"
-        title={<>Your career journey <span className="text-gradient">in 4 simple steps.</span></>}
+    <Section className="bg-surface-2/50 relative overflow-hidden">
+      <div className="absolute inset-0 grid-overlay opacity-30 pointer-events-none" />
+      <motion.div
+        className="blob top-10 -left-32 h-[400px] w-[400px] bg-[oklch(0.55_0.22_264)] opacity-20"
+        animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
-      <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {steps.map((s, i) => (
-          <div key={s.n} className="relative">
-            <div className="rounded-3xl bg-surface border border-border p-7 h-full glow-hover">
-              <div className="text-5xl font-display font-extrabold text-gradient">{s.n}</div>
-              <h3 className="mt-4 text-lg font-bold text-foreground">{s.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+      <div className="relative">
+        <Reveal>
+          <SectionHeader
+            eyebrow="How It Works"
+            title={<>Your career journey <span className="text-gradient">in 4 simple steps.</span></>}
+            subtitle="A guided, AI-powered path from profile creation to your next big role — built around outcomes."
+          />
+        </Reveal>
+
+        {/* Animated connecting line (desktop) */}
+        <div className="mt-20 relative">
+          <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px">
+            <div className="relative h-full w-full bg-border/60">
+              <motion.div
+                className="absolute inset-y-0 left-0 bg-gradient-to-r from-[oklch(0.55_0.22_264)] via-[oklch(0.72_0.14_211)] to-[oklch(0.71_0.16_162)]"
+                initial={{ width: "0%" }}
+                whileInView={{ width: "100%" }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+              />
             </div>
-            {i < steps.length - 1 && (
-              <div className="hidden lg:block absolute top-1/2 -right-4 h-px w-8 bg-gradient-to-r from-border to-transparent" />
-            )}
           </div>
-        ))}
+
+          <RevealStagger className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" stagger={0.15}>
+            {steps.map((s) => {
+              const Icon = s.icon;
+              return (
+                <motion.div key={s.n} variants={staggerItem} className="relative group">
+                  {/* Icon node on the line */}
+                  <div className="flex justify-center">
+                    <motion.div
+                      whileHover={{ scale: 1.08, rotate: 6 }}
+                      transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                      className="relative h-24 w-24 rounded-3xl bg-gradient-to-br from-[oklch(0.55_0.22_264)] to-[oklch(0.72_0.14_211)] flex items-center justify-center shadow-[var(--shadow-glow)] z-10"
+                    >
+                      <Icon className="h-10 w-10 text-white" />
+                      <span className="absolute -top-2 -right-2 h-7 w-7 rounded-full bg-white text-[oklch(0.21_0.07_257)] text-xs font-extrabold flex items-center justify-center shadow-md">
+                        {s.n}
+                      </span>
+                      <motion.span
+                        className="absolute inset-0 rounded-3xl bg-[oklch(0.72_0.14_211)] opacity-40 blur-xl -z-10"
+                        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.55, 0.3] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                    </motion.div>
+                  </div>
+
+                  <div className="mt-8 text-center gradient-border p-7 glow-hover">
+                    <h3 className="text-lg font-bold text-foreground">{s.t}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.d}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </RevealStagger>
+        </div>
+
+        <Reveal delay={0.2} className="mt-14 text-center">
+          <CTAButton variant="primary" as={Link} to="/talent">
+            Start Your Journey <ArrowRight className="h-4 w-4" />
+          </CTAButton>
+        </Reveal>
       </div>
     </Section>
   );
