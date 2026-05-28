@@ -1,13 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import {
-  Sparkles, ArrowRight, Brain, Users, Building2, GraduationCap,
+  ArrowRight, Brain, Users, Building2, GraduationCap,
   Briefcase, Target, Award, TrendingUp, Shield, Zap, BarChart3,
   CheckCircle2, FileText, Search, ChevronDown, Star, Globe2, Workflow,
+  UserPlus, Sparkles, Send, Rocket,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Section, SectionHeader, EyebrowChip, CTAButton } from "@/components/site/primitives";
-import heroImage from "@/assets/hero-ai.jpg";
+import { HeroCarousel } from "@/components/site/HeroCarousel";
+import { Reveal, RevealStagger, staggerItem } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -65,10 +68,10 @@ const aiFeatures = [
 ];
 
 const steps = [
-  { n: "01", t: "Create Smart Profile", d: "Upload resume, showcase skills, experience, and career goals." },
-  { n: "02", t: "Get AI Insights", d: "Receive matching jobs, skill suggestions, profile enhancements." },
-  { n: "03", t: "Connect Employers", d: "Apply to verified employers and become visible to hiring teams." },
-  { n: "04", t: "Get Hired & Grow", d: "Track interviews, get updates, and grow your career." },
+  { n: "01", t: "Create Smart Profile", d: "Upload resume, showcase skills, experience, and career goals.", icon: UserPlus },
+  { n: "02", t: "Get AI Insights", d: "Receive matching jobs, skill suggestions, profile enhancements.", icon: Sparkles },
+  { n: "03", t: "Connect Employers", d: "Apply to verified employers and become visible to hiring teams.", icon: Send },
+  { n: "04", t: "Get Hired & Grow", d: "Track interviews, get updates, and grow your career.", icon: Rocket },
 ];
 
 const stats = [
@@ -94,7 +97,7 @@ const faqs = [
 function Home() {
   return (
     <SiteLayout>
-      <Hero />
+      <HeroCarousel />
       <TrustedStrip />
       <AIIntelligence />
       <Ecosystem />
