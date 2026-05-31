@@ -16,12 +16,14 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "G Talent Pro — Powering the Future of Talent & Opportunity" },
-      { name: "description", content: "AI-powered talent ecosystem connecting employers, campuses, and professionals. Smart hiring, intelligent matching, and career growth — built for the modern workforce." },
-      { property: "og:title", content: "G Talent Pro — Powering the Future of Talent & Opportunity" },
-      { property: "og:description", content: "AI-driven recruitment platform built for employers, campuses & professionals." },
+      {
+        name: "description",
+        content:
+          "AI-powered talent ecosystem connecting employers, campuses, and professionals. Smart hiring, intelligent matching, and career growth — built for the modern workforce.",
+      },
     ],
   }),
-  component: Home,
+  component: HomePage,
 });
 
 const services = [

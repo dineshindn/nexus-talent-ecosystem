@@ -9,14 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TalentRouteImport } from './routes/talent'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as EmployersRouteImport } from './routes/employers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CampusRouteImport } from './routes/campus'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TalentRoute = TalentRouteImport.update({
   id: '/talent',
   path: '/talent',
@@ -25,6 +32,11 @@ const TalentRoute = TalentRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmployersRoute = EmployersRouteImport.update({
@@ -59,8 +71,10 @@ export interface FileRoutesByFullPath {
   '/campus': typeof CampusRoute
   '/contact': typeof ContactRoute
   '/employers': typeof EmployersRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/talent': typeof TalentRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +82,10 @@ export interface FileRoutesByTo {
   '/campus': typeof CampusRoute
   '/contact': typeof ContactRoute
   '/employers': typeof EmployersRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/talent': typeof TalentRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,8 +94,10 @@ export interface FileRoutesById {
   '/campus': typeof CampusRoute
   '/contact': typeof ContactRoute
   '/employers': typeof EmployersRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/talent': typeof TalentRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,8 +107,10 @@ export interface FileRouteTypes {
     | '/campus'
     | '/contact'
     | '/employers'
+    | '/privacy'
     | '/services'
     | '/talent'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -98,8 +118,10 @@ export interface FileRouteTypes {
     | '/campus'
     | '/contact'
     | '/employers'
+    | '/privacy'
     | '/services'
     | '/talent'
+    | '/terms'
   id:
     | '__root__'
     | '/'
@@ -107,8 +129,10 @@ export interface FileRouteTypes {
     | '/campus'
     | '/contact'
     | '/employers'
+    | '/privacy'
     | '/services'
     | '/talent'
+    | '/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,12 +141,21 @@ export interface RootRouteChildren {
   CampusRoute: typeof CampusRoute
   ContactRoute: typeof ContactRoute
   EmployersRoute: typeof EmployersRoute
+  PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
   TalentRoute: typeof TalentRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/talent': {
       id: '/talent'
       path: '/talent'
@@ -135,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/employers': {
@@ -181,9 +221,21 @@ const rootRouteChildren: RootRouteChildren = {
   CampusRoute: CampusRoute,
   ContactRoute: ContactRoute,
   EmployersRoute: EmployersRoute,
+  PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
   TalentRoute: TalentRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
