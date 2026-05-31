@@ -96,7 +96,7 @@ const faqs = [
   { q: "Is there a free tier for job seekers?", a: "Absolutely. Talent gets free access to AI Resume Builder, ATS Scoring, Interview Prep, and curated opportunities." },
 ];
 
-function Home() {
+function HomePage() {
   return (
     <SiteLayout>
       <HeroCarousel />
