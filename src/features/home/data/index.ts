@@ -1,5 +1,5 @@
 export { heroSlides } from "./hero.data";
-export type { HeroSlide } from "./hero.data";
+export type { HeroSlide } from "@/features/home/types/hero.types";
 
 export { services } from "./services.data";
 export type { ServiceItem } from "./services.data";
