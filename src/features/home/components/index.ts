@@ -1,0 +1,12 @@
+export { HeroSection } from "./HeroSection";
+export { HeroSlideVisual } from "./HeroSlideVisual";
+export { TrustedCompaniesSection } from "./TrustedCompaniesSection";
+export { AiIntelligenceSection } from "./AiIntelligenceSection";
+export { EcosystemSection } from "./EcosystemSection";
+export { ServicesSection } from "./ServicesSection";
+export { HowItWorksSection } from "./HowItWorksSection";
+export { StatsSection } from "./StatsSection";
+export { TestimonialsSection } from "./TestimonialsSection";
+export { FaqSection } from "./FaqSection";
+export { CtaBannerSection } from "./CtaBannerSection";
+export { HomePage } from "./HomePage";
