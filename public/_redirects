@@ -1,0 +1,5 @@
+# Send site root to the home page
+/ /home 301
+
+# Fallback for client-side navigation (static files are served first)
+/* /home/index.html 200

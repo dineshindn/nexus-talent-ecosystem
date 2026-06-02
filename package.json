@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "postbuild": "node --input-type=module -e \"import fs from 'node:fs'; fs.rmSync('dist/server', { recursive: true, force: true });\"",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",

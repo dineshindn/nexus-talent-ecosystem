@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TalentRouteImport } from './routes/talent'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as EmployersRouteImport } from './routes/employers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CampusRouteImport } from './routes/campus'
@@ -37,6 +38,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmployersRoute = EmployersRouteImport.update({
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/campus': typeof CampusRoute
   '/contact': typeof ContactRoute
   '/employers': typeof EmployersRoute
+  '/home': typeof HomeRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/talent': typeof TalentRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/campus': typeof CampusRoute
   '/contact': typeof ContactRoute
   '/employers': typeof EmployersRoute
+  '/home': typeof HomeRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/talent': typeof TalentRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/campus': typeof CampusRoute
   '/contact': typeof ContactRoute
   '/employers': typeof EmployersRoute
+  '/home': typeof HomeRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/talent': typeof TalentRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/campus'
     | '/contact'
     | '/employers'
+    | '/home'
     | '/privacy'
     | '/services'
     | '/talent'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/campus'
     | '/contact'
     | '/employers'
+    | '/home'
     | '/privacy'
     | '/services'
     | '/talent'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/campus'
     | '/contact'
     | '/employers'
+    | '/home'
     | '/privacy'
     | '/services'
     | '/talent'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   CampusRoute: typeof CampusRoute
   ContactRoute: typeof ContactRoute
   EmployersRoute: typeof EmployersRoute
+  HomeRoute: typeof HomeRoute
   PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
   TalentRoute: typeof TalentRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/employers': {
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   CampusRoute: CampusRoute,
   ContactRoute: ContactRoute,
   EmployersRoute: EmployersRoute,
+  HomeRoute: HomeRoute,
   PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
   TalentRoute: TalentRoute,

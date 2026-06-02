@@ -4,7 +4,7 @@ import { Menu, X, Sparkles, Wand2 } from "lucide-react";
 import logoSrc from "@/assets/logo/logo.svg";
 
 const navLinks = [
-  { to: "/",          label: "Home" },
+  { to: "/home",      label: "Home" },
   // { to: "/services",  label: "Services" },
   { to: "/employers", label: "Employers" },
   { to: "/campus",    label: "Campus" },
@@ -35,7 +35,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center flex-shrink-0">
+        <Link to="/home" className="flex items-center flex-shrink-0">
           <img src={logoSrc} alt="G Talent Pro" className="h-9 w-auto object-contain" draggable={false} />
         </Link>
 

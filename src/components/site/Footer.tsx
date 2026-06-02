@@ -14,7 +14,7 @@ export function Footer() {
 
           {/* ── Brand ── */}
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-flex items-center">
+            <Link to="/home" className="inline-flex items-center">
               <img
                 src={logoSrc}
                 alt="G Talent Pro"

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Section, CTAButton, EyebrowChip } from "@/components/site/primitives";
 import { Reveal, RevealStagger, staggerItem } from "@/components/site/Reveal";
+import { HowItWorksSection } from "@/components/site/HowItWorksSection";
 import talentHero from "@/assets/talent-hero.jpg";
 
 export const Route = createFileRoute("/talent")({
@@ -19,6 +20,7 @@ export const Route = createFileRoute("/talent")({
   component: TalentPage,
 });
 
+
 const tools = [
   { icon: FileText, t: "AI Resume Builder", d: "Craft stunning, ATS-friendly resumes in minutes.", accent: "from-[oklch(0.55_0.22_264)] to-[oklch(0.72_0.14_211)]" },
   { icon: Target, t: "ATS Score Checker", d: "Know your match score and optimize before applying.", accent: "from-[oklch(0.72_0.14_211)] to-[oklch(0.71_0.16_162)]" },
@@ -27,6 +29,7 @@ const tools = [
   { icon: LayoutDashboard, t: "Career Dashboard", d: "Track applications, interviews, and growth in one place.", accent: "from-[oklch(0.78_0.16_85)] to-[oklch(0.71_0.16_162)]" },
   { icon: Search, t: "Smart Job Matches", d: "Curated opportunities aligned to your goals.", accent: "from-[oklch(0.72_0.14_211)] to-[oklch(0.65_0.2_320)]" },
 ];
+
 
 function TalentPage() {
   return (
@@ -105,6 +108,9 @@ function TalentPage() {
           ))}
         </RevealStagger>
       </Section>
+
+      {/* HOW IT WORKS */}
+      <HowItWorksSection gradientId="talentHiw" />
 
       {/* RESUME SCORE */}
       <Section className="bg-surface-2/50">
